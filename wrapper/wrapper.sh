@@ -18,7 +18,7 @@ echo ${rmthis}
 GENOMEU="${genome}"
 BAMFILEU="${bam_file}"
 REFERENCEU=(${reference})
-INPUTSU="${GENOMEU}, ${BAMFILE}, ${REFERENCEU[@]:1}"
+INPUTSU="${GENOMEU}, ${BAMFILEU}, ${REFERENCEU[@]:1}"
 CMDLINEARG="portcullis full -o output ${reference} ${verbose} ${bam_filter} ${exon_gff} ${intron_gff} ${use_csi} ${orientation} ${strandedness} ${separate} ${extra} ${max_length} ${canonical} ${min_cov} ${save_bad} ${GENOMEU} ${BAMFILEU}"
 echo inputs are ${INPUTSU}
 echo arguments are ${CMDLINEARG}
