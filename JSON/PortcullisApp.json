@@ -19,6 +19,227 @@
    "http://edamontology.org/operation_3695",
    "http://edamontology.org/topic_3047",
    "http://edamontology.org/topic_3320"],
-  "inputs": [],
-  "parameters": []
+  "inputs": [
+    {"id": "genome",
+    "value": {
+      "required": true,
+      "default": ""
+    },
+    "details": { "label": "Genome FASTA file",
+      "showArgument": false
+    },
+    "semantics": {
+      "maxCardinality": 1
+    }},
+    {"id": "bam_file",
+    "value": {
+      "required": true,
+      "default": ""
+    },
+    "details": { "label": "sorted BAM file(s)",
+      "showArgument": false
+    },
+    "semantics": {
+      "maxCardinality": -1
+    }},
+    {"id": "reference",
+    "value": {
+      "required": false,
+      "default": ""
+    },
+    "details": { "label": "reference BED file",
+      "description": "Reference annotation of junctions in BED format.  Any junctions found by the junction analysis tool will be preserved if found in this reference file regardless of any other filtering criteria.",
+      "showArgument": true,
+      "argument": "--reference "
+    },
+    "semantics": {
+      "maxCardinality": 1
+    }}
+  ],
+  "parameters": [
+    {"id": "verbose",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "verbose",
+      "showArgument": true,
+      "argument": "--verbose "
+      }
+    },
+    {"id": "bam_filter",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "BAM filter",
+      "description": "Filter out alignments corresponding with false junctions.  Warning: this is time consuming; make sure you really want to do this first!",
+      "showArgument": true,
+      "argument": "--bam_filter "
+      }
+    },
+    {"id": "exon_gff",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "exon GFF",
+      "description": "Output exon-based junctions in GFF format.",
+      "showArgument": true,
+      "argument": "--exon_gff "
+      }
+    },
+    {"id": "intron_gff",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "intron GFF",
+      "description": "Output intron-based junctions in GFF format.",
+      "showArgument": true,
+      "argument": "--intron_gff "
+      }
+    },
+    {"id": "use_csi",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "use CSI",
+      "description": "Whether to use CSI indexing rather than BAI indexing.  CSI has the advantage that it supports very long target sequences (probably not an issue unless you are working on huge genomes).  BAI has the advantage that it is more widely supported (useful for viewing in genome browsers).",
+      "showArgument": true,
+      "argument": "--use_csi "
+      }
+    },
+    {"id": "orientation",
+    "value": {
+      "type": "enumeration",
+      "visible": true,
+      "enumValues" : [
+        {"F" : "Single-end forward orientation"},
+        {"R" : "single-end reverse orientation"},
+        {"FR" : "paired-end, with reads sequenced towards center of fragment -> <-.  This is usual setting for most Illumina paired end sequencing"},
+        {"RF" : "paired-end, reads sequenced away from center of fragment <- ->"},
+        {"FF" : "paired-end, reads both sequenced in forward orientation"},
+        {"RR" : "paired-end, reads both sequenced in reverse orientation"},
+        {"UNKNOWN" : "default, portcullis will workaround any calculations requiring orientation information"}
+      ],
+      "default": "UNKNOWN"
+      },
+    "details": {
+      "label": "orientation",
+      "description": "The orientation of the reads that produced the BAM alignments",
+      "showArgument": true,
+      "argument": "--orientation "
+      }
+    },
+    {"id": "strandedness",
+    "value": {
+      "type": "enumeration",
+      "visible": true,
+      "enumValues" : [
+        {"unstranded" : "Standard Illumina"},
+        {"firststrand" : "dUTP, NSR, NNSR"},
+        {"secondstrand" : "Ligation, Standard SOLiD, flux sim reads"},
+        {"UNKNOWN" : "default, portcullis will workaround any calculations requiring strandedness information"}
+      ],
+      "default": "UNKNOWN"
+      },
+    "details": {
+      "label": "strandedness",
+      "description": "Whether BAM alignments were generated using a type of strand specific RNAseq library",
+      "showArgument": true,
+      "argument": "--strandedness "
+      }
+    },
+    {"id": "separate",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "separate",
+      "description": "Separate spliced from unspliced reads.",
+      "showArgument": true,
+      "argument": "--separate "
+      }
+    },
+    {"id": "extra",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "extra",
+      "description": "Calculate additional metrics that take some time to generate.  Automatically activates BAM splitting mode (--separate).",
+      "showArgument": true,
+      "argument": "--extra "
+      }
+    },
+    {"id": "max_length",
+    "value": {
+      "type": "number",
+      "visible": true,
+      "default": 0
+      },
+    "details": {
+      "label": "max length",
+      "description": "Filter junctions longer than this value.  Default (0) is to not filter based on length.",
+      "showArgument": true,
+      "argument": "--max_length "
+      }
+    },
+    {"id": "canonical",
+    "value": {
+      "type": "enumeration",
+      "visible": true,
+      "enumValues" : [
+        {"C" : "Canonical junctions (GT-AG)"},
+        {"S" : "Semi-canonical junctions (AT-AC, or  GC-AG)"},
+        {"N" : "Non-canonical"},
+        {"OFF" : "OFF"}
+      ],
+      "default": "OFF"
+      },
+    "details": {
+      "label": "canonical",
+      "description": "Keep junctions based on their splice site status. OFF means, keep all junctions.  User can keep two categories.",
+      "showArgument": true,
+      "argument": "--canonical "
+    },
+    "semantics": {
+      "maxCardinality": -1
+    }
+    },
+    {"id": "min_cov",
+    "value": {
+      "type": "number",
+      "visible": true,
+      "default": 1
+      },
+    "details": {
+      "label": "min cov",
+      "description": "Only keep junctions with a number of split reads greater than or equal to this number.",
+      "showArgument": true,
+      "argument": "--min_cov "
+      }
+    },
+    {"id": "save_bad",
+    "value": {
+      "type": "flag",
+      "visible": true
+      },
+    "details": {
+      "label": "save bad",
+      "description": "Saves bad junctions (i.e. junctions that fail the filter), as well as good junctions (those that pass)",
+      "showArgument": true,
+      "argument": "--save bad "
+      }
+    }
+  ]
 }
