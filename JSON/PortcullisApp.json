@@ -7,7 +7,7 @@
   "author": "Alice Minotto",
   "version": "1.0.0",
   "deploymentSystem": "cyverseUK-Storage2",
-  "deploymentPath": "/mnt/data/apps/portcullis",
+  "deploymentPath": "/mnt/data/apps/Portcullis",
   "executionSystem": "cyverseUK-Batch2",
   "executionType": "CLI",
   "parallelism": "SERIAL",
