@@ -25,7 +25,7 @@ echo arguments are ${CMDLINEARG}
 
 
 echo  universe                = docker >> lib/condorSubmitEdit.htc
-echo docker_image            =  cyverseuk/portullis:1.0.0beta6 >> lib/condorSubmitEdit.htc ######
+echo docker_image            =  cyverseuk/portcullis:1.0.0beta6 >> lib/condorSubmitEdit.htc ######
 echo executable               =  ./launch.sh >> lib/condorSubmitEdit.htc
 echo arguments                          = ${CMDLINEARG} >> lib/condorSubmitEdit.htc
 echo transfer_input_files = ${INPUTSU} >> lib/condorSubmitEdit.htc
