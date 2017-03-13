@@ -36,10 +36,10 @@ RUN echo 'deb http://archive.ubuntu.com/ubuntu/ xenial-security multiverse' >> /
     make install && \
     export PATH=/samtools-1.3.1/bin:$PATH && \
     cd / && \
-    wget https://github.com/maplesond/portcullis/releases/download/Release-1.0.0_beta6/portcullis-1.0.0_beta6.tar.gz && \
-    tar -xvzf portcullis-1.0.0_beta6.tar.gz && \
-    rm portcullis-1.0.0_beta6.tar.gz && \
-    cd portcullis-1.0.0_beta6 && \
+    wget https://github.com/maplesond/portcullis/releases/download/Release-1.0.0/portcullis-1.0.0.tar.gz && \
+    tar -xvzf portcullis-1.0.0.tar.gz && \
+    rm portcullis-1.0.0.tar.gz && \
+    cd portcullis-1.0.0 && \
     ./configure && \
     make && \
     make install
